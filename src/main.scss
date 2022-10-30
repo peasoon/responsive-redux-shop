@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.yaytso {
+  @apply bg-slate-400 w-[300px] h-[400px];
+  border: 1px solid tomato;
+}
