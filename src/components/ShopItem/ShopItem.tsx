@@ -1,21 +1,38 @@
 import * as React from "react";
 
-interface IShopItemProps {}
+export interface IShopItemProps {
+  id: number;
+  title: string;
+  color: string;
+  img: string;
+  price: number;
+  category: string;
+}
 
-const ShopItem: React.FunctionComponent<IShopItemProps> = (props) => {
+const ShopItem: React.FunctionComponent<IShopItemProps> = ({
+  title,
+  color,
+  img,
+  price,
+  category,
+  id,
+}) => {
   return (
     <div className="shop-item border-zinc-900 border-[1px] rounded-[30px] overflow-hidden">
       <div className="shop-item__title flex justify-center">
-        <span className="">Title: Hammer</span>
+        <span className="">Title: {title}</span>
+      </div>
+      <div className="shop-item__color flex justify-center">
+        <span className="">Color: {color}</span>
       </div>
       <div className="shop-item__price flex justify-center">
-        <span>Price: very mutch</span>
+        <span>Price: {price}</span>
       </div>
-      <div className="shop-item__img">
-        <img
-          src="https://media.istockphoto.com/photos/hammer-with-green-handle-isolated-on-white-picture-id1311275971"
-          alt="Item photo"
-        />
+      <div className="shop-item__category flex justify-center">
+        <span>Category: {category}</span>
+      </div>
+      <div className="shop-item__img h-[300px]">
+        <img src={img} alt="Item photo" className='w-full h-full object-contain'/>
       </div>
     </div>
   );

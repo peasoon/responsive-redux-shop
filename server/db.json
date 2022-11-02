@@ -1,0 +1,76 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "title": "hammer",
+      "color": "blue",
+      "img": "/shopItems/hammer-blue.jpg",
+      "price": 2395,
+      "category": "tools"
+    },
+    {
+      "id": 2,
+      "title": "hammer",
+      "color": "green",
+      "img": "/shopItems/hammer-green.jpg",
+      "price": 2145,
+      "category": "tools"
+    },
+    {
+      "id": 3,
+      "title": "hammer",
+      "color": "wooden",
+      "img": "/shopItems/hammer-wooden.jpg",
+      "price": 2453,
+      "category": "tools"
+    },
+    {
+      "id": 4,
+      "title": "pullover",
+      "color": "blue",
+      "img": "/shopItems/pullover-blue.jpg",
+      "price": 1743,
+      "category": "clothes"
+    },
+    {
+      "id": 5,
+      "title": "pullover",
+      "color": "white",
+      "img": "/shopItems/pullover-white.jpg",
+      "price": 1835,
+      "category": "clothes"
+    },
+    {
+      "id": 6,
+      "title": "pullover",
+      "color": "yellow",
+      "img": "/shopItems/pullover-yellow.jpg",
+      "price": 1927,
+      "category": "clothes"
+    },
+    {
+      "id": 7,
+      "title": "tv",
+      "color": "blue",
+      "img": "/shopItems/tv-blue.jpg",
+      "price": 12439,
+      "category": "technique"
+    },
+    {
+      "id": 8,
+      "title": "tv",
+      "color": "orange",
+      "img": "/shopItems/tv-orange.jpg",
+      "price": 14500,
+      "category": "technique"
+    },
+    {
+      "id": 9,
+      "title": "tv",
+      "color": "wooden",
+      "img": "/shopItems/tv-wooden.jpg",
+      "price": 11763,
+      "category": "technique"
+    }
+  ]
+}
