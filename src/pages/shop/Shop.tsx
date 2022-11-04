@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../utils/redux/hooks";
 import { setItems } from "../../utils/redux/shopSlice";
 import { IShopItemProps } from "./../../components/ShopItem/ShopItem";
 import uuid from "react-uuid";
+import Pagination from "../../components/Pagination/Pagination";
 
 interface IShopProps {
   children: React.ReactNode;
@@ -13,14 +14,16 @@ interface IShopProps {
 const Shop: React.FunctionComponent<IShopProps> = () => {
   const dispatch = useAppDispatch();
   const { isLoading, isError, items } = useAppSelector((state) => state.shop);
+	const queryParams = useAppSelector(state => state.search)
+	const queryString = `?_page=${queryParams.currentPage}&_limit=${queryParams.itemsPerPage}`
 
   React.useEffect(() => {
-    dispatch(setItems());
-  }, []);
+    dispatch(setItems(queryString));
+  }, [queryString]);
 
   React.useEffect(() => {
-    console.log(items);
-  }, [items]);
+    console.log(queryParams);
+  }, [queryParams]);
   return (
     <div className="shop">
       <h1 className="text-center">This is a shop page</h1>
@@ -34,6 +37,9 @@ const Shop: React.FunctionComponent<IShopProps> = () => {
             const key = uuid();
             return <ShopItem {...item} key={key} />;
           })}
+      </div>
+      <div className="shop-pagination">
+        <Pagination />
       </div>
     </div>
   );

@@ -8,21 +8,40 @@ interface InitialStateType {
   items: IShopItemProps[];
 }
 
+export interface IPayload  {
+	items: IShopItemProps[];
+	pagesCount: number
+}
+
 const initialState: InitialStateType = {
   isLoading: true,
   isError: false,
   items: [],
 };
 
-export const setItems = createAsyncThunk("shop/setItems", async () => {
-  const data = await axios.get("http://localhost:3001/items");
-  if (data.statusText === "OK") {
-    const items = await data.data;
-    return items;
-  } else {
-    throw new Error("Error " + data.status);
-  }
+const shopApi = axios.create({
+  baseURL: "http://localhost:3001/items",
 });
+
+
+
+export const setItems = createAsyncThunk(
+  "shop/setItems",
+  async (query: string) => {
+    const data = await shopApi.get(query);
+		let pagesCount = 0
+    if (data.headers.link) {
+			const itemsCnt = await(await axios.get('http://localhost:3001/additional')).data
+			pagesCount = itemsCnt.itemsCount
+    }
+    if (data.statusText === "OK") {
+      const items = await data.data;
+      return {items,pagesCount};
+    } else {
+      throw new Error("Error " + data.status);
+    }
+  }
+);
 
 export const shopSlice = createSlice({
   name: "shop",
@@ -32,10 +51,10 @@ export const shopSlice = createSlice({
     builder
       .addCase(
         setItems.fulfilled,
-        (state, { payload }: PayloadAction<IShopItemProps[]>) => {
+        (state, { payload }: PayloadAction<IPayload>) => {
           state.isLoading = false;
           state.isError = false;
-          state.items = payload;
+          state.items = payload.items;
         }
       )
       .addCase(setItems.rejected, (state) => {

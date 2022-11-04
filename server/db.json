@@ -72,5 +72,8 @@
       "price": 11763,
       "category": "technique"
     }
-  ]
+  ],
+	"additional": {
+		"itemsCount": 9
+	}
 }

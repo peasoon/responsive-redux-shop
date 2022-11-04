@@ -16,7 +16,24 @@ svg {
   justify-content: center;
 }
 
-.yaytso {
-  @apply bg-slate-400 w-[300px] h-[400px];
-  border: 1px solid tomato;
+.shop-pagination {
+  &__content {
+    .pagination-container {
+      ul {
+        display: flex;
+        li {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          border: 1px solid black;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+					&.selected {
+						background-color: tomato;
+					}
+        }
+      }
+    }
+  }
 }
