@@ -8,6 +8,7 @@ import uuid from "react-uuid";
 import Pagination from "../../components/Pagination/Pagination";
 import Categories from "../../components/Categories/Categories";
 import { searchActions } from "../../utils/redux/searchSlice";
+import Search from "../../components/Search/Search";
 
 interface IShopProps {
   children: React.ReactNode;
@@ -16,14 +17,15 @@ interface IShopProps {
 const Shop: React.FunctionComponent<IShopProps> = () => {
   const dispatch = useAppDispatch();
   const { isLoading, isError, items } = useAppSelector((state) => state.shop);
-  const { categories, currentCategorie } = useAppSelector(
+  const { categories, currentCategorie, searchParam } = useAppSelector(
     (state) => state.search
   );
   const queryParams = useAppSelector((state) => state.search);
   const queryCategory = currentCategorie
     ? `&category=${currentCategorie}`
-    : null;
-  const queryString = `?_page=${queryParams.currentPage}&_limit=${queryParams.itemsPerPage}${queryCategory}`;
+    : '';
+		const search = searchParam ? `&q=${searchParam}` : ''
+  const queryString = `?_page=${queryParams.currentPage}&_limit=${queryParams.itemsPerPage}${queryCategory}${search}`;
 
   React.useEffect(() => {
     dispatch(searchActions.setCurrentPage(1));
@@ -41,6 +43,9 @@ const Shop: React.FunctionComponent<IShopProps> = () => {
       <h1 className="text-center">This is a shop page</h1>
       <div className="shop-categories mb-[10px]">
         {categories && <Categories categories={categories} />}
+      </div>
+      <div className="shop-search mb-[10px]">
+        <Search />
       </div>
       <div className="shop-content grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-x-[20px] gap-y-[20px]">
         {isLoading && <p className="text-[44px] text-center">Loading...</p>}
