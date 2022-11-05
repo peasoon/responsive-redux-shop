@@ -4,7 +4,8 @@ import { IPayload } from './shopSlice'
 
 interface IinitialState {
   itemsPerPage: string;
-  category: string;
+  categories: string[];
+	currentCategorie: string;
   filterParam: string;
 	pagesCount: number;
 	currentPage: number
@@ -12,7 +13,8 @@ interface IinitialState {
 
 const initialState: IinitialState = {
   itemsPerPage: "3",
-  category: "",
+  categories: [],
+	currentCategorie: '',
   filterParam: "",
 	pagesCount: 0,
 	currentPage: 1
@@ -30,7 +32,10 @@ export const searchSlice = createSlice({
 		},
 		setCurrentPage: (state,{payload}:PayloadAction<number>) => {
 			state.currentPage = payload
-		}
+		},
+		setCurrentCategorie: (state,{payload}:PayloadAction<string>) => {
+			state.currentCategorie = payload
+		},
   },
 	extraReducers: (builder) => {
 		builder.addCase(setItems.fulfilled,(state,{payload}:PayloadAction<IPayload>)=>{
@@ -39,6 +44,7 @@ export const searchSlice = createSlice({
 				pages = 0
 			}
 			state.pagesCount = pages;
+			state.categories = [...new Set(payload.categories)]
 		})
 	}
 });

@@ -6,6 +6,8 @@ import { setItems } from "../../utils/redux/shopSlice";
 import { IShopItemProps } from "./../../components/ShopItem/ShopItem";
 import uuid from "react-uuid";
 import Pagination from "../../components/Pagination/Pagination";
+import Categories from "../../components/Categories/Categories";
+import { searchActions } from "../../utils/redux/searchSlice";
 
 interface IShopProps {
   children: React.ReactNode;
@@ -14,8 +16,18 @@ interface IShopProps {
 const Shop: React.FunctionComponent<IShopProps> = () => {
   const dispatch = useAppDispatch();
   const { isLoading, isError, items } = useAppSelector((state) => state.shop);
-	const queryParams = useAppSelector(state => state.search)
-	const queryString = `?_page=${queryParams.currentPage}&_limit=${queryParams.itemsPerPage}`
+  const { categories, currentCategorie } = useAppSelector(
+    (state) => state.search
+  );
+  const queryParams = useAppSelector((state) => state.search);
+  const queryCategory = currentCategorie
+    ? `&category=${currentCategorie}`
+    : null;
+  const queryString = `?_page=${queryParams.currentPage}&_limit=${queryParams.itemsPerPage}${queryCategory}`;
+
+  React.useEffect(() => {
+    dispatch(searchActions.setCurrentPage(1));
+  }, [currentCategorie]);
 
   React.useEffect(() => {
     dispatch(setItems(queryString));
@@ -27,6 +39,9 @@ const Shop: React.FunctionComponent<IShopProps> = () => {
   return (
     <div className="shop">
       <h1 className="text-center">This is a shop page</h1>
+      <div className="shop-categories mb-[10px]">
+        {categories && <Categories categories={categories} />}
+      </div>
       <div className="shop-content grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-x-[20px] gap-y-[20px]">
         {isLoading && <p className="text-[44px] text-center">Loading...</p>}
         {isError && (

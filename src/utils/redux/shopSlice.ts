@@ -8,9 +8,10 @@ interface InitialStateType {
   items: IShopItemProps[];
 }
 
-export interface IPayload  {
-	items: IShopItemProps[];
-	pagesCount: number
+export interface IPayload {
+  items: IShopItemProps[];
+  pagesCount: number;
+  categories: string[];
 }
 
 const initialState: InitialStateType = {
@@ -23,20 +24,24 @@ const shopApi = axios.create({
   baseURL: "http://localhost:3001/items",
 });
 
-
-
 export const setItems = createAsyncThunk(
   "shop/setItems",
   async (query: string) => {
     const data = await shopApi.get(query);
-		let pagesCount = 0
+    let pagesCount = 0;
     if (data.headers.link) {
-			const itemsCnt = await(await axios.get('http://localhost:3001/additional')).data
-			pagesCount = itemsCnt.itemsCount
+      const itemsCnt = await (
+        await axios.get("http://localhost:3001/additional")
+      ).data;
+      pagesCount = itemsCnt.itemsCount;
     }
     if (data.statusText === "OK") {
       const items = await data.data;
-      return {items,pagesCount};
+			const wholeItems = await (
+        await axios.get("http://localhost:3001/items")
+      ).data;
+      const categories = wholeItems.map((item: IShopItemProps) => item.category);
+      return { items, pagesCount, categories };
     } else {
       throw new Error("Error " + data.status);
     }
