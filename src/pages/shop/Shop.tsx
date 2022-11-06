@@ -9,6 +9,7 @@ import Pagination from "../../components/Pagination/Pagination";
 import Categories from "../../components/Categories/Categories";
 import { searchActions } from "../../utils/redux/searchSlice";
 import Search from "../../components/Search/Search";
+import Sort from "../../components/Sort/Sort";
 
 interface IShopProps {
   children: React.ReactNode;
@@ -17,15 +18,18 @@ interface IShopProps {
 const Shop: React.FunctionComponent<IShopProps> = () => {
   const dispatch = useAppDispatch();
   const { isLoading, isError, items } = useAppSelector((state) => state.shop);
-  const { categories, currentCategorie, searchParam } = useAppSelector(
-    (state) => state.search
-  );
+  const {
+    categories,
+    currentCategorie,
+    searchParam,
+    sortParam,
+    sortDirection,
+  } = useAppSelector((state) => state.search);
   const queryParams = useAppSelector((state) => state.search);
-  const queryCategory = currentCategorie
-    ? `&category=${currentCategorie}`
-    : '';
-		const search = searchParam ? `&q=${searchParam}` : ''
-  const queryString = `?_page=${queryParams.currentPage}&_limit=${queryParams.itemsPerPage}${queryCategory}${search}`;
+  const queryCategory = currentCategorie ? `&category=${currentCategorie}` : "";
+  const search = searchParam ? `&q=${searchParam}` : "";
+  const sort = sortParam ? `&_sort=${sortParam}&_order=${sortDirection}` : "";
+  const queryString = `?_page=${queryParams.currentPage}&_limit=${queryParams.itemsPerPage}${queryCategory}${search}${sort}`;
 
   React.useEffect(() => {
     dispatch(searchActions.setCurrentPage(1));
@@ -46,6 +50,9 @@ const Shop: React.FunctionComponent<IShopProps> = () => {
       </div>
       <div className="shop-search mb-[10px]">
         <Search />
+      </div>
+      <div className="shop-sort mb-[10px]">
+        <Sort />
       </div>
       <div className="shop-content grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-x-[20px] gap-y-[20px]">
         {isLoading && <p className="text-[44px] text-center">Loading...</p>}

@@ -8,7 +8,9 @@ interface IinitialState {
 	currentCategorie: string;
   searchParam: string;
 	pagesCount: number;
-	currentPage: number
+	currentPage: number;
+	sortParam: string;
+	sortDirection: string
 }
 
 const initialState: IinitialState = {
@@ -17,7 +19,9 @@ const initialState: IinitialState = {
 	currentCategorie: '',
   searchParam: "",
 	pagesCount: 0,
-	currentPage: 1
+	currentPage: 1,
+	sortParam: '',
+	sortDirection: 'asc'
 };
 
 export const searchSlice = createSlice({
@@ -38,6 +42,10 @@ export const searchSlice = createSlice({
 		},
 		setSearchParam: (state,{payload}:PayloadAction<string>) => {
 			state.searchParam = payload
+		},
+		setSortParams: (state,{payload}:PayloadAction<string[]>) => {
+			payload[0] && (state.sortParam = payload[0]);
+			payload[1] && (state.sortDirection = payload[1]);
 		},
   },
 	extraReducers: (builder) => {
