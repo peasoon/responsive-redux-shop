@@ -12,10 +12,10 @@ import Search from "../../components/Search/Search";
 import Sort from "../../components/Sort/Sort";
 
 interface IShopProps {
-  children: React.ReactNode;
+  
 }
 
-const Shop: React.FunctionComponent<IShopProps> = () => {
+const Shop: React.FunctionComponent<IShopProps> = (props) => {
   const dispatch = useAppDispatch();
   const { isLoading, isError, items } = useAppSelector((state) => state.shop);
   const {

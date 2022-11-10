@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import MobileHeader from "./MobileHeader/MobileHeader";
 import Sidebar from "./SIdebar/Sidebar";
 
@@ -19,8 +19,26 @@ const Layout: React.FunctionComponent<ILayoutProps> = (props) => {
         }
       >
         <Sidebar isSidebarOpen={isSidebarOpen}>
-          <p>Item 1</p>
-          <p>Item 2</p>
+          <p>
+            <NavLink
+              to="/shop"
+              className={({ isActive }) =>
+                isActive ? "text-red-600" : undefined
+              }
+            >
+              Shop
+            </NavLink>
+          </p>
+          <p>
+            <NavLink
+              to="/cart"
+              className={({ isActive }) =>
+                isActive ? "text-red-600" : undefined
+              }
+            >
+              Cart
+            </NavLink>
+          </p>
           <p>Item 3</p>
         </Sidebar>
       </div>

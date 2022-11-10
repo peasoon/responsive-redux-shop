@@ -23,10 +23,6 @@ const Sidebar: React.FunctionComponent<ISidebarProps> = ({
         (isSidebarOpen ? "pointer-events-auto" : "pointer-events-none")
       }
       {...props}
-      onClick={() => {
-        console.log(isSidebarOpen);
-        console.log("sidebar clicked");
-      }}
     >
       <motion.div
         initial={{ x: "100%" }}
