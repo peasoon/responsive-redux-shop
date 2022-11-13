@@ -12,8 +12,6 @@ const initialState: ICartState = {
   itemsAtCart: 0,
 };
 
-//const dispatch = useAppDispatch();
-
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -26,14 +24,38 @@ export const cartSlice = createSlice({
       state.itemsAtCart = state.itemsAtCart + payload.quantity;
     },
     removeFromCart: (state, { payload }: PayloadAction<number>) => {
-			const newItems = state.items.filter(item=>item.id !== payload)
-			state.items.forEach(item => {
-				if(item.id === payload) {
-					state.itemsAtCart = state.itemsAtCart - item.quantity
-				}
-			})
-			state.items = newItems
-		},
+      const newItems = state.items.filter((item) => item.id !== payload);
+      state.items.forEach((item) => {
+        if (item.id === payload) {
+          state.itemsAtCart = state.itemsAtCart - item.quantity;
+        }
+      });
+      state.items = newItems;
+    },
+    changeItemQty: (
+      state,
+      { payload }: PayloadAction<{ id: number; newQty: number }>
+    ) => {
+      console.log("change item qty--->", payload);
+      state.items = state.items.map((item) => {
+        if (item.id === payload.id) {
+          return { ...item, quantity: payload.newQty };
+        } else {
+          return item;
+        }
+      });
+      state.itemsAtCart = state.items.reduce(
+        (acc, item) => acc + item.quantity,
+        0
+      );
+    },
+    removeItem: (state, { payload }: PayloadAction<number>) => {
+      state.items = state.items.filter((item) => item.id !== payload);
+      state.itemsAtCart = state.items.reduce(
+        (acc, item) => acc + item.quantity,
+        0
+      );
+    },
   },
 });
 

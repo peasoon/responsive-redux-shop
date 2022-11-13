@@ -10,16 +10,24 @@ const Layout: React.FunctionComponent<ILayoutProps> = (props) => {
   return (
     <div className="app-content min-h-screen relative">
       <div>
-        <MobileHeader setIsSidebarOpen={setIsSidebarOpen} />
+        <MobileHeader
+          setIsSidebarOpen={setIsSidebarOpen}
+          isSidebarOpen={isSidebarOpen}
+        />
       </div>
       <div
         className={
-          "fixed right-0 overflow-x-hidden h-full w-1/2 z-[100] " +
+          "fixed right-0 overflow-x-hidden h-full w-1/2 z-[700] " +
           (isSidebarOpen ? "pointer-events-auto" : "pointer-events-none")
         }
       >
         <Sidebar isSidebarOpen={isSidebarOpen}>
-          <p>
+          <p
+            onClick={() => {
+              console.log("link clicked");
+              setIsSidebarOpen(false);
+            }}
+          >
             <NavLink
               to="/shop"
               className={({ isActive }) =>
@@ -29,7 +37,12 @@ const Layout: React.FunctionComponent<ILayoutProps> = (props) => {
               Shop
             </NavLink>
           </p>
-          <p>
+          <p
+            onClick={() => {
+              console.log("link clicked");
+              setIsSidebarOpen(false);
+            }}
+          >
             <NavLink
               to="/cart"
               className={({ isActive }) =>
@@ -39,7 +52,6 @@ const Layout: React.FunctionComponent<ILayoutProps> = (props) => {
               Cart
             </NavLink>
           </p>
-          <p>Item 3</p>
         </Sidebar>
       </div>
       <Outlet />

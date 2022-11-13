@@ -41,7 +41,9 @@ export const searchSlice = createSlice({
 			state.currentCategorie = payload
 		},
 		setSearchParam: (state,{payload}:PayloadAction<string>) => {
-			state.searchParam = payload
+			state.searchParam = payload;
+			state.currentPage = 1
+			state.itemsPerPage = ''
 		},
 		setSortParams: (state,{payload}:PayloadAction<string[]>) => {
 			payload[0] && (state.sortParam = payload[0]);
