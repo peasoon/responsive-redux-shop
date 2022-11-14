@@ -4,10 +4,21 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap");
 
+@font-face {
+  font-family: "Phanthom";
+  src: url("/fonts/Phanthom-Twilight.woff") format("woff"),
+    url("/fonts/Phanthom-Twilight.woff2") format("woff2");
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  font-family: "Phanthom";
+	font-weight: bold;
 }
 
 svg {
@@ -29,9 +40,9 @@ svg {
           display: flex;
           align-items: center;
           justify-content: center;
-					&.selected {
-						background-color: tomato;
-					}
+          &.selected {
+            background-color: tomato;
+          }
         }
       }
     }

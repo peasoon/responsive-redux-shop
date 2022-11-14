@@ -1,5 +1,6 @@
 import * as React from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import DeasctopHeader from "./DesctopHeader/DesctopHeader";
 import MobileHeader from "./MobileHeader/MobileHeader";
 import Sidebar from "./SIdebar/Sidebar";
 
@@ -9,15 +10,18 @@ const Layout: React.FunctionComponent<ILayoutProps> = (props) => {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
   return (
     <div className="app-content min-h-screen relative">
-      <div>
+      <div className="tablet:hidden">
         <MobileHeader
           setIsSidebarOpen={setIsSidebarOpen}
           isSidebarOpen={isSidebarOpen}
         />
       </div>
+      <div className="hidden tablet:block">
+        <DeasctopHeader />
+      </div>
       <div
         className={
-          "fixed right-0 overflow-x-hidden h-full w-1/2 z-[700] " +
+          "tablet:hidden fixed right-0 overflow-x-hidden h-full w-1/2 z-[700] " +
           (isSidebarOpen ? "pointer-events-auto" : "pointer-events-none")
         }
       >

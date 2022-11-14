@@ -22,12 +22,12 @@ const CartItem: React.FunctionComponent<ICartItemProps> = ({
   )!.quantity;
 
   return (
-    <div className="cart-content__item border-[1px] border-solid border-slate-800 rounded-[10px] py-[5px] px-[10px]">
+    <div className="cart-content__item flex flex-col h-[100%] border-[1px] border-solid border-slate-800 rounded-[10px] py-[5px] px-[10px]">
       <div className="title">Title: {title}</div>
       <div className="color">Color: {color}</div>
       <div className="category">Category: {category}</div>
       <div className="price">Price: {price}</div>
-      <div className="image">
+      <div className="image grow">
         <img src={img} alt="" />
       </div>
       <div className="flex items-center justify-between">

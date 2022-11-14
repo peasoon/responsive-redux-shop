@@ -5,7 +5,7 @@ interface IWrapperProps {
 }
 
 const Wrapper: React.FunctionComponent<IWrapperProps> = ({children}) => {
-	return <div className="desctop:container mx-auto px-[20px]">
+	return <div className="max-w-[1210px] mx-auto px-[20px]">
 		{children}
 	</div>;
 };

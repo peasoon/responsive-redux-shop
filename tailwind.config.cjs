@@ -18,7 +18,7 @@ module.exports = {
 				'pizdatiy': 'hsl(294.39, 54.87%, 61.76%)',
 			},
 			fontFamily: {
-				'main': ['Raleway'],
+				'main': ['Phanthom'],
 			},
 			gridTemplateColumns: {
         'fill-16': 'repeat(auto-fill, minmax(100px, 1fr))',
